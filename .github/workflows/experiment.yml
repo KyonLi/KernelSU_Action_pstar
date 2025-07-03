@@ -1,4 +1,4 @@
-name: (pstar) (Experiment) (4.19.157 LOS21) (KSU-Next docker lxc nethunter) Build Kernel
+name: (pstar) (Experiment) (4.19.157) (LOS21 KSU-Next docker lxc nethunter) Build Kernel
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -60,7 +60,6 @@ jobs:
         echo "IMPORT_DOCKER=$(cat $BASE_CONFIG_ENV | grep -w "IMPORT_DOCKER" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "Kernel_Version=$(cat $BASE_CONFIG_ENV | grep -w "Kernel_Version" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "Kernel_Extra_Version=$(cat $BASE_CONFIG_ENV | grep -w "Kernel_Extra_Version" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "SUSFS_VERSION=$(cat $BASE_CONFIG_ENV | grep -w "SUSFS_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "Remove_Kernel_Validation=$(cat $BASE_CONFIG_ENV | grep -w "Remove_Kernel_Validation" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "Remove_Warning=$(cat $BASE_CONFIG_ENV | grep -w "Remove_Warning" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "Docker_LXC_Patches=$(cat $BASE_CONFIG_ENV | grep -w "Docker_LXC_Patches" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV

@@ -1,10 +1,6 @@
 name: (pstar) (SuSpicion) (4.19.157) (EvoX Wild_KSU docker lxc nethunter susfs) Build Kernel
 on:
-  watch:
-    types: [started]
-  schedule:
-    - cron: "0 0 * * 0"
-
+  repository_dispatch:
   workflow_dispatch:
 
 jobs:

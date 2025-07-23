@@ -306,6 +306,7 @@ jobs:
         -e CONFIG_WLAN_VENDOR_ZYDAS \
         -e CONFIG_USB_ZD1201 \
         -e CONFIG_ZD1211RW \
+        -e CONFIG_R8188EU \
         -e CONFIG_USB_NET_RNDIS_WLAN
 
         # Configuring the Kernel - SDR (https://www.kali.org/docs/nethunter/nethunter-kernel-5-config-4/)
@@ -355,6 +356,13 @@ jobs:
         -e CONFIG_NFSD_V3 \
         -e CONFIG_NFSD_V4
 
+        # Suppress -Werror for certain warnings to allow building rtl8188eu.
+        patch -p1 < kernel_patches/patches/${{ env.Kernel_Extra_Version }}/rtl8188eu-build-fix.patch
+
+        # Try disabling locks on wireless regulatory data to allow override.
+        sed -i 's/CONFIG_CFG80211_INTERNAL_REGDB=y/CONFIG_CFG80211_INTERNAL_REGDB=n/' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+        sed -i 's/CONFIG_CFG80211_USE_KERNEL_REGDB_KEYS=y/CONFIG_CFG80211_USE_KERNEL_REGDB_KEYS=n/' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+        sed -i 's/CONFIG_CFG80211_REQUIRE_SIGNED_REGDB=y/CONFIG_CFG80211_REQUIRE_SIGNED_REGDB=n/' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
 
     - name: Remove ANDROID_PARANOID_NETWORK
       if: env.Remove_ANDROID_PARANOID_NETWORK == 'true'

@@ -1,4 +1,4 @@
-name: (pstar) (ConsenSuS) (4.19.157) (LOS22 rsuntk docker lxc nethunter susfs) Build Kernel
+name: (pstar) (ConsenSuS) (4.19.157) (LOS22.1 rsuntk docker lxc nethunter susfs) Build Kernel
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -29,6 +29,8 @@ jobs:
         echo "KSU_EXPECTED_SIZE=$(cat $CONFIG_ENV | grep -w "KSU_EXPECTED_SIZE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KSU_EXPECTED_HASH=$(cat $CONFIG_ENV | grep -w "KSU_EXPECTED_HASH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "SUSFS_VERSION=$(cat $CONFIG_ENV | grep -w "SUSFS_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "Kernel_Version=$(cat $CONFIG_ENV | grep -w "Kernel_Version" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "Kernel_Extra_Version=$(cat $CONFIG_ENV | grep -w "Kernel_Extra_Version" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         BASE_CONFIG_ENV=shared.env
         echo "USE_CUSTOM_CLANG=$(cat $BASE_CONFIG_ENV | grep -w "USE_CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "CUSTOM_CLANG_SOURCE=$(cat $BASE_CONFIG_ENV | grep -w "CUSTOM_CLANG_SOURCE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
@@ -59,8 +61,6 @@ jobs:
         echo "BUILD_BOOT_IMG=$(cat $BASE_CONFIG_ENV | grep -w "BUILD_BOOT_IMG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "SOURCE_BOOT_IMAGE=$(cat $BASE_CONFIG_ENV | grep -w "SOURCE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "IMPORT_DOCKER=$(cat $BASE_CONFIG_ENV | grep -w "IMPORT_DOCKER" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "Kernel_Version=$(cat $BASE_CONFIG_ENV | grep -w "Kernel_Version" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "Kernel_Extra_Version=$(cat $BASE_CONFIG_ENV | grep -w "Kernel_Extra_Version" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "Remove_Kernel_Validation=$(cat $BASE_CONFIG_ENV | grep -w "Remove_Kernel_Validation" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "Remove_Warning=$(cat $BASE_CONFIG_ENV | grep -w "Remove_Warning" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "Docker_LXC_Patches=$(cat $BASE_CONFIG_ENV | grep -w "Docker_LXC_Patches" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV

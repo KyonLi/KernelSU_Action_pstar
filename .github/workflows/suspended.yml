@@ -393,6 +393,13 @@ jobs:
         git apply kernel_patches/patches/${{ env.Kernel_Extra_Version }}/0001-Reapply-cred-switch-to-using-atomic_long_t.patch
         git apply kernel_patches/patches/${{ env.Kernel_Extra_Version }}/0002-BACKPORT-cred-add-get_cred_rcu.patch
 
+    - name: Backport seccomp add filter_count field for KernelSU
+      if: env.ENABLE_KERNELSU == 'true'
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        echo "------------ Patches for backport seccomp add filter_count field for kernelsu ----------------------------------------------------"
+        git apply kernel_patches/patches/${{ env.Kernel_Extra_Version }}/0001-BACKPORT-seccomp-add-filter_count-field-for-KernelSU.patch
+
     - name: Backport ptrace move setting/clearing
       if: env.ENABLE_KERNELSU == 'true'
       run: |

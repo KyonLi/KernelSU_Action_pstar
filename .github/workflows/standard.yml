@@ -375,7 +375,7 @@ jobs:
         #disable CONFIG_MODVERSIONS is useless
 
     - name: Backport rename strncpy_from_unsafe_user commit required by kernelsu
-      if: env.ENABLE_KERNELSU == 'true'
+      if: false
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         echo "------------ Patches for backport rename strncpy_from_unsafe_user commit required by kernelsu ----------------------------------------------------"
